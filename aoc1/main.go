@@ -45,18 +45,26 @@ func sumCalories(elves [][]int) []int {
 	return totalCalories
 }
 
-func findBiggestCalories(calories []int) int {
-	var biggest int
-	for _, cal := range calories {
-		if cal > biggest {
-			biggest = cal
+func findBiggestCalories(calories []int) [3]int {
+	var biggest [3]int
+	for i := 0; i < 3; i++ {
+		highestVal := 0
+		for _, cal := range calories {
+			if i == 0 && cal > highestVal {
+				highestVal = cal
+			} else if i > 0 && cal > highestVal && cal < biggest[i-1] {
+				highestVal = cal
+			}
 		}
+		biggest[i] = highestVal
 	}
 	return biggest
 }
 
 func main() {
 	elves := convertToElves("./elves.txt")
-	calSum := sumCalories(elves)
-	fmt.Println("The elf with the most calories has:", findBiggestCalories(calSum), "calories")
+	elfCalSum := sumCalories(elves)
+	biggestCals := findBiggestCalories(elfCalSum)
+	fmt.Println("Elf calories rank:\n1.", biggestCals[0], "\n2.", biggestCals[1], "\n3.", biggestCals[2])
+	fmt.Println("Total calories:", biggestCals[0]+biggestCals[1]+biggestCals[2])
 }
