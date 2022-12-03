@@ -64,7 +64,7 @@ def choose_move(game):
             return f"{p1} {win[p1]}"
 
 
-with open("./input", "r")as f:
+with open("./input", "r") as f:
     f = f.readlines()
     moves = list(map(choose_move, f))
     player_points = list(map(get_points, moves))

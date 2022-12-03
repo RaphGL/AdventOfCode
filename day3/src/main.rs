@@ -49,13 +49,14 @@ fn part2(rucksacks: slice::Iter<&str>) -> u32 {
         let mut group: Vec<String> = Vec::new();
         for i in group_members[0].chars() {
             let i = i.to_string();
-            if group_members[1].contains(&i) && group_members[2].contains(&i) && !group.contains(&i) {
+            if group_members[1].contains(&i) && group_members[2].contains(&i) && !group.contains(&i)
+            {
                 group.push(i);
             }
         }
 
         all_priorities.append(&mut group);
-    };
+    }
 
     get_total_priority(all_priorities)
 }
@@ -63,9 +64,6 @@ fn part2(rucksacks: slice::Iter<&str>) -> u32 {
 fn main() {
     let rucksacks = include_str!("rucksacks.in").split("\n").collect_vec();
     let rucksacks = rucksacks.iter();
-    if rucksacks.len() - 1 % 3 != 0 {
-        panic!("There are not enough elfs to make groups of 3");
-    }
     rucksacks.clone().for_each(|r| {
         if r.len() % 2 != 0 {
             panic!("Comparments aren't the same size");
