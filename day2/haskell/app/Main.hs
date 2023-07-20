@@ -3,10 +3,12 @@ module Main where
 import Data.List.Split (splitOn)
 import System.Environment (getArgs)
 
+data GameStatus = Won | Lost | Drawn
+
 getPlays :: String -> [[String]]
 getPlays file = map (splitOn " ") (lines file)
 
-getWinner :: String -> String -> (Int, String)
+getWinner :: String -> String -> (GameStatus, String)
 getWinner p1 p2 = case (p1, p2) of
   ("C", "X") -> wins
   ("B", "Z") -> wins
@@ -16,9 +18,9 @@ getWinner p1 p2 = case (p1, p2) of
   ("C", "Z") -> draws
   _ -> loses
   where
-    wins = (1, p2)
-    draws = (-1, p2)
-    loses = (0, p2)
+    wins = (Won, p2)
+    draws = (Drawn, p2)
+    loses = (Lost, p2)
 
 getPoints :: [String] -> Int
 getPoints play = case chosen of
@@ -28,9 +30,9 @@ getPoints play = case chosen of
   where
     (winner, chosen) = getWinner (head play) (play !! 1)
     playPoint = case winner of
-      -1 -> 3 -- won
-      0 -> 0 -- lost
-      1 -> 6 -- drew
+      Lost -> 0
+      Drawn -> 3
+      Won -> 6
 
 -- only required for part 2
 chooseMove :: [String] -> [String]

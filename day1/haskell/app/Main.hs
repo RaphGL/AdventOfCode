@@ -20,4 +20,4 @@ main = do
   elvesCalories <- readFile (head args)
   printf "Elf with most calories: %d\n\n" $ elfWithMostCalories elvesCalories
   let top3 = elfTop3MostCalories elvesCalories
-  printf "Top 3 Most Calories: %d" $ sum top3
+  printf "Top 3 Most Calories: %d\n" $ sum top3
