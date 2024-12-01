@@ -37,8 +37,6 @@ fn part2(locations: &Vec<(usize, usize)>) -> usize {
         *occurrence += 1;
     }
 
-    occurrences = occurrences.into_iter().collect();
-
     locations
         .iter()
         .map(|(num, _)| {
