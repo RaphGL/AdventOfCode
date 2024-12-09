@@ -425,3 +425,5 @@ docgen_tmp/
 
 # End of https://www.toptal.com/developers/gitignore/api/rust,go,python,c,node,zig
 
+/2024/day2/CMakeSettings.json
+/2024/.vs
